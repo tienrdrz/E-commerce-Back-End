@@ -3,26 +3,29 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
+//GET all tags including associated Product data
 router.get('/', (req, res) => {
-  // find all tags
-  // be sure to include its associated Product data
+
 });
 
+// GET a single tag including associated Product data
 router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+
 });
 
+// POST a new tag
 router.post('/', (req, res) => {
-  // create a new tag
+
 });
 
+//PUT to update a tag through id
 router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+
 });
 
+// DELETE to destroy a tag through id
 router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
+
 });
 
 module.exports = router;

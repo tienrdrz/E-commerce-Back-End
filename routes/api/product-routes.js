@@ -3,19 +3,63 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// get all products
+// GET all products including associated category and tag data
 router.get('/', (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
+  Product.findAll({
+    // Category and Tag included here
+    include: [
+      {
+        model: Category,
+        attributes: ['id', 'category_name']
+      },
+      {
+        model: Tag,
+        attributes: ['id', 'tag_name'],
+        through: ProductTag
+      }
+    ]
+  })
+  .then(productData => res.json(productData))
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  })
 });
 
-// get one product
+// GET a single product including associated category and tag data
 router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+  Product.findOne({
+    // ID is needed and set here
+    where: {
+      id: req.params.id
+    },
+    // Category and Tag included here
+    include: [
+      {
+        model: Category,
+        attributes: ['id', 'category_name']
+      },
+      {
+        model: Tag,
+        attributes: ['id', 'tag_name'],
+        through: ProductTag
+      }
+    ]
+  })
+  .then(productData => {
+    if (!productData) {
+      res.status(404).json({ message: 'No product found with this id'});
+      return;
+    }
+    res.json(productData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
-// create new product
+// POST to create a new product
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -47,7 +91,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
+// PUT to update a product
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -89,8 +133,24 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// DELETE a product
 router.delete('/:id', (req, res) => {
-  // delete one product by its `id` value
+  Product.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(productData => {
+    if(!productData) {
+      res.status(404).json({ message: 'No product found with this id'});
+      return;
+    }
+    res.json(productData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err)
+  });
 });
 
 module.exports = router;
