@@ -17,7 +17,7 @@ Using node packages I created a back end server that would allow a user to get, 
 
 npm i dotenv express mysql2 sequelize
 
-### Log in to mysql:
+### Log into mysql:
 
 mysql -u root -p
 
