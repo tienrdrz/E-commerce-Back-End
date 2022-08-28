@@ -13,7 +13,7 @@ Using node packages I created a back end server that would allow a user to get, 
 
 ## Usage
 
-### Being with running:
+### Begin with installing the following packages:
 
 npm i dotenv express mysql2 sequelize
 
@@ -25,7 +25,7 @@ mysql -u root -p
 
 source db/schema.sql
 
-### Quit, seed the database, and start the server:
+### Quit mysql, seed the database, and start the server:
 
 quit
 
