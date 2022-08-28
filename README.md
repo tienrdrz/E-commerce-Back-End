@@ -13,19 +13,19 @@ Using node packages I created a back end server that would allow a user to get, 
 
 ## Usage
 
-Being with running:
+### Being with running:
 
 npm i dotenv express mysql2 sequelize
 
-Log in to mysql:
+### Log in to mysql:
 
 mysql -u root -p
 
-Create the database:
+### Create the database:
 
 source db/schema.sql
 
-Quit, seed the database, and start the server:
+### Quit, seed the database, and start the server:
 
 quit
 
